@@ -11,3 +11,4 @@ set_global_assignment -name VHDL_FILE rtl/scramble_audio.vhd
 set_global_assignment -name VHDL_FILE rtl/scramble.vhd
 set_global_assignment -name VHDL_FILE rtl/scramble_top.vhd
 set_global_assignment -name SYSTEMVERILOG_FILE "Arcade-Scramble.sv"
+set_global_assignment -name VERILOG_FILE rtl/joydb15.v
