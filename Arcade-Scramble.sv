@@ -191,8 +191,8 @@ wire [21:0] gamma_bus;
 
 wire        rom_download = ioctl_download && !ioctl_index;
 
-wire [31:0] joy1 = |status[31:30] ? {joydb15_1[9],joydb15_1[10],joydb15_1[8],joydb15_1[8:0]} : joy1_USB;
-wire [31:0] joy2 =  status[31]    ? {joydb15_2[9],joydb15_2[8],joydb15_2[10],joydb15_2[8:0]} : status[30] ? joy1_USB : joy2_USB;
+wire [31:0] joy1 = |status[31:30] ? {joydb15_1[9],joydb15_2[8],joydb15_1[8],joydb15_1[7:0]} : joy1_USB;
+wire [31:0] joy2 =  status[31]    ? {joydb15_2[9],joydb15_2[8],joydb15_1[8],joydb15_2[7:0]} : status[30] ? joy1_USB : joy2_USB;
 
 
 
@@ -230,6 +230,7 @@ hps_io #(.STRLEN($size(CONF_STR)>>3)) hps_io
 
 	.joystick_0(joy1_USB),
 	.joystick_1(joy2_USB),
+	.joy_raw({(joydb15_1[8]&joydb15_1[6]),joydb15_1[4:0]}),	
 	.ps2_key(ps2_key)
 );
 
