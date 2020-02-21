@@ -95,7 +95,8 @@ module emu
 	// 1 - D-/TX
 	// 2..6 - USR2..USR6
 	// Set USER_OUT to 1 to read from USER_IN.
-    output	      USER_MODE,	
+	output		  USER_OSD,
+   output	     USER_MODE,	
 	input   [6:0] USER_IN,
 	output  [6:0] USER_OUT
 );
@@ -106,6 +107,7 @@ wire   JOY_CLK, JOY_LOAD;
 wire   JOY_DATA  = USER_IN[5];
 assign USER_OUT  = |status[31:30] ? {5'b11111,JOY_CLK,JOY_LOAD} : '1;
 assign USER_MODE = |status[31:30] ;
+assign USER_OSD  = joydb15_1[8] & joydb15_1[6];
 
 assign LED_USER  = ioctl_download;
 assign LED_DISK  = 0;
@@ -230,7 +232,7 @@ hps_io #(.STRLEN($size(CONF_STR)>>3)) hps_io
 
 	.joystick_0(joy1_USB),
 	.joystick_1(joy2_USB),
-	.joy_raw({(joydb15_1[8]&joydb15_1[6]),joydb15_1[4:0]}),	
+	.joy_raw(joydb15_1[5:0]), //Menu Dirs, A:Action B:Back
 	.ps2_key(ps2_key)
 );
 
